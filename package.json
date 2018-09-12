@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fabiocasmar/angular2-api-krono.git"
+    "url": "git+ssh://git@github.com/kronoapp/angular2-api-krono.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fabiocasmar/angular2-api-krono/issues"
+    "url": "https://github.com/kronoapp/angular2-api-krono/issues"
   },
-  "homepage": "https://github.com/fabiocasmar/angular2-api-krono#readme",
+  "homepage": "https://github.com/kronoapp/angular2-api-krono#readme",
   "devDependencies": {
     "@angular/common": "2.2.1",
     "@angular/compiler": "2.2.1",

@@ -4,7 +4,7 @@ This is a template for building your own reusable Angular2/Ionic2 module using T
 
 ## Install package
 
-npm install git+ssh://git@github.com/fabiocasmar/angular2-api-krono.git
+npm install git+ssh://git@github.com/kronoapp/angular2-api-krono.git
 
 ## Developing
 
