@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "@angular/http": "2.2.1",
-    "@angular/platform-server": "^6.1.7",
     "angular-2-local-storage": "^1.0.2",
     "angular2-jwt": "^0.2.3"
   }
