@@ -21,11 +21,10 @@ export var ListsService = (function (_super) {
     }
     // postListBasket function: create, or delete list in
     //                    specific client
-    ListsService.prototype.postListBasket = function (payload, task) {
+    ListsService.prototype.postListBasket = function (payload) {
         var observer = new BehaviorSubject(null);
-        payload['task'] = task;
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/basket/', payload, this.headerAuthentication())
+        this.saveBase('client/store/new/list/items/', payload, this.headerAuthentication())
             .subscribe(function (data) {
             observer.next(data);
         }, function (error) {

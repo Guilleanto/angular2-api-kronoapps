@@ -22,14 +22,14 @@ export class ListsService extends BaseService {
 
     // postListBasket function: create, or delete list in
     //                    specific client
-    postListBasket(payload, task) {
+    postListBasket(payload) {
 
         let observer = new BehaviorSubject(null);
 
-        payload['task'] = task;
+        
 
         console.log("PAYLOAD LIST USER", payload);
-        this.saveBase('client/store/newlist/basket/', payload, 
+        this.saveBase('client/store/new/list/items/', payload, 
                       this.headerAuthentication())
             .subscribe(data => {
                 observer.next(data);

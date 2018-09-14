@@ -9,7 +9,7 @@ export declare class ListsService extends BaseService {
     localStorage: LocalStorageService;
     lists: ListModelGeneral[];
     constructor(http: Http, localStorage: LocalStorageService);
-    postListBasket(payload: any, task: any): BehaviorSubject<any>;
+    postListBasket(payload: any): BehaviorSubject<any>;
     postListOrder(payload: any, task: any): BehaviorSubject<any>;
     getLists(applicationId: any, userId: any, storeId: any): BehaviorSubject<any>;
     getList(applicationId: any, userId: any, storeId: any, listId: any): BehaviorSubject<any>;
