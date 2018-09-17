@@ -62,7 +62,7 @@ export var BaseService = (function () {
         };
     }
     // getBase function: get information from server with base path url 
-    BaseService.prototype.getBase = function (path2, options) {
+    BaseService.prototype.getBase = function (baseUrl, path2, options) {
         var _this = this;
         if (options === void 0) { options = null; }
         var d = new Date();
@@ -73,9 +73,9 @@ export var BaseService = (function () {
             console.log("VOY A REFRESCAR TOKEN EN GET");
             // Initial value to the observer is null
             return new Observable(function (observer) {
-                _this.postRefreshToken().subscribe(function (data) {
+                _this.postRefreshToken(baseUrl).subscribe(function (data) {
                     if (data) {
-                        _this.http.get(_this.path + path2, _this.headerAuthentication())
+                        _this.http.get(baseUrl + path2, _this.headerAuthentication())
                             .map(function (res) { return res.json(); })
                             .catch(_this.handleError)
                             .retry(5)
@@ -86,14 +86,14 @@ export var BaseService = (function () {
             });
         }
         else {
-            return this.http.get(this.path + path2, options)
+            return this.http.get(baseUrl + path2, options)
                 .map(function (res) { return res.json(); })
                 .catch(this.handleError)
                 .retry(5);
         }
     };
     // saveBase function: post in server with base path url
-    BaseService.prototype.saveBase = function (path2, payload, options) {
+    BaseService.prototype.saveBase = function (baseUrl, path2, payload, options) {
         var _this = this;
         if (options === void 0) { options = null; }
         var d = new Date();
@@ -103,9 +103,9 @@ export var BaseService = (function () {
             console.log("VOY A REFRESCAR TOKEN EN POST");
             // Initial value to the observer is null
             return new Observable(function (observer) {
-                _this.postRefreshToken().subscribe(function (data) {
+                _this.postRefreshToken(baseUrl).subscribe(function (data) {
                     if (data) {
-                        _this.http.post(_this.path + path2, payload, _this.headerAuthentication())
+                        _this.http.post(baseUrl + path2, payload, _this.headerAuthentication())
                             .map(function (res) { return res.json(); })
                             .catch(_this.handleError)
                             .retry(5)
@@ -116,7 +116,7 @@ export var BaseService = (function () {
             });
         }
         else {
-            return this.http.post(this.path + path2, payload, options)
+            return this.http.post(baseUrl + path2, payload, options)
                 .map(function (res) { return res.json(); })
                 .catch(this.handleError)
                 .retry(5);
@@ -124,14 +124,14 @@ export var BaseService = (function () {
     };
     // postRefreshToken function: if token of user is expired, send post to 
     //                            request new token
-    BaseService.prototype.postRefreshToken = function () {
+    BaseService.prototype.postRefreshToken = function (base) {
         var _this = this;
         // Initial value to the observer is null
         var observer = new BehaviorSubject(null);
         var postToken = {
             'token': this.localStorage.get('tokenUser')
         };
-        this.http.post(this.path + 'api-token-refresh-client/', postToken, null)
+        this.http.post(base + 'api-token-refresh-client/', postToken, null)
             .map(function (res) { return res.json(); })
             .catch(this.handleError)
             .subscribe(function (data) {

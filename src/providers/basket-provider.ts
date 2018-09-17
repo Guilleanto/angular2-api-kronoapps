@@ -21,12 +21,12 @@ export class BasketService extends BaseService {
 
     // getBasket function: obtain information of basket
     //                     of specific client in Botica store
-    getBasket(applicationId, userId, storeId) {
+    getBasket(baseUrl, applicationId, userId, storeId) {
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
 
-        this.getBase('application/' + applicationId + '/client/' + userId + 
+        this.getBase(baseUrl + 'application/' + applicationId + '/client/' + userId + 
                      '/store/' + storeId + '/basket/', 
                      this.headerAuthentication())
             .subscribe(basket => {
@@ -40,14 +40,14 @@ export class BasketService extends BaseService {
 
     // postItems function: post items inside basket of specific
     //                     client in Botica store
-    postItemsDelete(payload) {
+    postItemsDelete(baseUrl, payload) {
         
         payload['task'] = 'delete_items';
         console.log("payload de lo que hare post", payload);
 
         // Initial value to the observer is null
         let observer = new BehaviorSubject(null);
-        this.saveBase('client/store/basket/deleteitems/', payload,
+        this.saveBase(baseUrl, 'client/store/basket/deleteitems/', payload,
                       this.headerAuthentication())
             .subscribe(data => {
                 observer.next(data);
@@ -59,7 +59,7 @@ export class BasketService extends BaseService {
 
     // postItem function: post item inside basket of specific
     //                    client in Botica store
-    postItem(item, itemId=null, typeTask) {
+    postItem(baseUrl,item, itemId=null, typeTask) {
 
         if (typeTask == 'add') {
 
@@ -87,7 +87,7 @@ export class BasketService extends BaseService {
                 productId: item.id
             }
             
-            this.saveBase('client/store/basket/items/', this.itemPost,
+            this.saveBase(baseUrl + 'client/store/basket/items/', this.itemPost,
                           this.headerAuthentication())
                 .subscribe(data => {
                     console.log("ITEMPOST AL AGREGAR", this.itemPost);
@@ -127,7 +127,7 @@ export class BasketService extends BaseService {
                 productId: item.id
             }
 
-            this.saveBase('client/store/basket/items/', this.itemPost,
+            this.saveBase(baseUrl + 'client/store/basket/items/', this.itemPost,
                           this.headerAuthentication())                 
                 .subscribe(data => {
                     console.log("ITEMPOST AL EDITAR", this.itemPost);
@@ -143,7 +143,7 @@ export class BasketService extends BaseService {
                 id: itemId
             }
 
-            this.saveBase('client/store/basket/items/', this.itemPost,
+            this.saveBase(baseUrl + 'client/store/basket/items/', this.itemPost,
                           this.headerAuthentication())
                 .subscribe(data => {
                     console.log("ITEMPOST AL ELIMINAR", this.itemPost);
